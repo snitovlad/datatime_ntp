@@ -1,0 +1,15 @@
+{
+  "name": "DateTime new tab page",
+  "description": "Override the new tab page with time and date",
+  "version": "0.8.0",
+  "permissions": [
+    "storage"
+  ],
+  "incognito": "split",
+  "chrome_url_overrides": {
+    "newtab": "blank.html"
+  },
+  "icons": { "48": "icon48.png",
+          "128": "icon128.png" },
+  "manifest_version": 2
+}
