@@ -10,15 +10,17 @@
 
 <body class="color-normal">
 
-   <div style="height:30vh"></div>
-   <div id="datebox">Monday, January 1, 1970</div>
-   <div id="clockbox">00:00:00</div>
-   <div id="extra-clocks">
-      <div class="extra-clockbox-container">
-         <span id="label-UTC/GMT">UTC/GMT </span><span id="clockbox-UTC/GMT">00:00:00</span>
-         <div class="local-clockbox-container"></div>
+   <div class="clockbox-container">
+      <div style="height:30vh"></div>
+      <div id="datebox">Monday, January 1, 1970</div>
+      <div id="clockbox">00:00:00</div>
+      <div id="extra-clocks">
+         <div class="extra-clockbox-container">
+            <span id="label-UTC/GMT">UTC/GMT </span><span id="clockbox-UTC/GMT">00:00:00</span>
+            <div class="local-clockbox-container"></div>
+         </div>
       </div>
-   </div>
+   </div>   
 
    <button id="settings-button" class="color-normal">
       <svg height="512px" id="settings-icon" viewBox="0 0 512 512" width="512px" xml:space="preserve"
@@ -31,15 +33,21 @@
    <div id="button-block">
 
       <div id="theme-button" class="switch">
-         <input type="radio" class="switch-input" name="view" value="on" id="on" >
+         <input type="radio" class="switch-input" name="view" value="on" id="on">
          <label for="on" class="switch-label switch-label-off">NIGHT</label>
          <input type="radio" class="switch-input" name="view" value="off" id="off" checked>
          <label for="off" class="switch-label switch-label-on">DAY</label>
          <span class="switch-selection"></span>
-       </div>
+      </div>
+
+      <div id="search-block">
+         <input type="text" placeholder="time zone search" id="input-zones-search">
+         <button id="clear-button">❌</button>
+      </div>
 
       <ul id="timezone-options"></ul>
    </div>
+
    <script src="time.js" type="module"></script>
 </body>
 

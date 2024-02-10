@@ -56,10 +56,12 @@ body {
    top: 2px;
    left: 2px;
    border: none;
-   padding: 5px;
    cursor: pointer;
    border-radius: 50%;
    transition: background-color 0.3s ease;
+   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #settings-icon {
@@ -87,13 +89,6 @@ body {
 }
 
 #theme-button {
-   /* width: 290px;
-   height: 30px;
-   margin: 0 0 5px 0;
-   border-radius: 5px;
-   background-color: #969696;
-   font-family: sans-serif;
-   font-size: 1vw; */
    cursor: pointer;
 }
 
@@ -101,22 +96,38 @@ body {
    width: 290px;
    height: 300px;
    border-radius: 5px;
-   background-color: #969696;
+   background-color: #cfcbcb;
    font-family: sans-serif;
-   font-size: 0.8vw;
+   font-size: 15px;
    cursor: pointer;
    overflow: hidden;
    overflow: auto;
    color: black;
    text-align: left;
    padding-left: 5px;
+   border: 1px solid black;
 }
 
 li.active {
    background-color: black;
-   color: #969696;
+   color: #cfcbcb;
 }
 
+#search-block {
+   padding: 10px 0;
+   display: flex;
+  justify-content: space-between;
+}
+#input-zones-search {
+   width: 250px;
+   height: 30px;
+   padding-left: 5px;
+   border-radius: 5px;
+}
+#clear-button {
+   width: 30px;
+   border-radius: 5px;
+}
 /* ==========================BUTTON FOR THEME CHANGIN ======================== */
 .switch {
   position: relative;
@@ -145,12 +156,14 @@ li.active {
   font-weight: bold;
 }
 
-.switch-label-off {
+.switch-label-off, .switch-label-on {
   padding-left: 2px;
+  color: #000;
+  font-weight: bold;
 }
 
 .switch-label-on {
-  padding-right: 2px;
+  color: #efecec;
 }
 
 

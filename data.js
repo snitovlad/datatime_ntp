@@ -1,7 +1,8 @@
 export const data = {
    localTimeZones: [],
    isShownPanelExtraZones: false,
-   isThemeDark: false
+   isThemeDark: false,
+   searchValue: ''
 }
 
 const tday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -56,6 +57,7 @@ let zoneArr = Intl.supportedValuesOf('timeZone');
    zoneEl.isOnLocalTimebox = false;
    return zoneEl
 })
+
 //sort the array by zones
 data.localTimeZones.sort((a, b) => b.zoneOffset - a.zoneOffset)
 

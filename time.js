@@ -20,7 +20,7 @@ function getValue() {
 			span.innerText = "00:00:00"
 
 			let label = document.createElement('span');
-			label.innerText = element.zoneName
+			label.innerText = element.zoneName.replace(/\(\w+[\W\d+]+\)/, ''); //deleted "(GMT+8:00)"
 
 			let container = document.createElement("div")
 			container.id = element.id
@@ -35,13 +35,41 @@ function getValue() {
 	updateDate();
 }
 
+const searchInput = document.getElementById('input-zones-search');
+searchInput.addEventListener('input', () => {
+	data.searchValue = searchInput.value;
+	//создаем переменную для регулярного выражения 
+	const searchValueForReg = new RegExp(data.searchValue.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi')
+	//формируем окно с зонами в зависимости от строки поиска
+	if (data.searchValue.length <= 2) {
+		createElementLi(data.localTimeZones)
+	} else {
+		let arrLocalTimeZones = data.localTimeZones.filter(el => el.zoneName.match(searchValueForReg))
+		createElementLi(arrLocalTimeZones)
+	}
+})
+
+const clearButton = document.getElementById('clear-button');
+clearButton.addEventListener('click', () => {
+	data.searchValue = '';
+	searchInput.value = ''
+	createElementLi(data.localTimeZones)
+})
+
 //create li with timezones
-for (let i = 0; i < data.localTimeZones.length; i++) {
-	let newList = document.createElement('li');
-	newList.innerText = data.localTimeZones[i].zoneName;
-	newList.id = data.localTimeZones[i].id;
-	document.getElementById("timezone-options").append(newList)
+function createElementLi(arr) {
+	document.getElementById("timezone-options").innerHTML = "";
+	arr.map(el => {
+		const newList = document.createElement('li');
+		newList.innerText = el.zoneName;
+		newList.id = el.id;
+		if (el.isOnLocalTimebox === true) newList.classList.add('active');
+		return document.getElementById("timezone-options").append(newList)
+	})
 }
+
+createElementLi(data.localTimeZones)
+
 
 //hang the handler on ul
 const ulZoneList = document.querySelector('#timezone-options');
@@ -84,8 +112,16 @@ const switchOn = document.getElementById('on');
 document.getElementById('theme-button').addEventListener('change', () => {
 	if (switchOn.checked === true) {
 		data.isThemeDark = true
-} else {					
-	 	data.isThemeDark = false
+	} else {
+		data.isThemeDark = false
 	}
 	theme()
 })
+
+
+// 1. Текст при изменении разрешения экрана (стягивании окна) уменьшается
+
+// 2. В светлой теме довольно неудобно читаются надписи из-за цветов, можно было бы подумать какие выбрать, чтобы было понятнее проще, подпись day/night как будто расплывчата немного, типа как без очков читаешь, можно вообще сделать текст рядом, а кнопку без подписей, просто слайдер
+
+// 3. Очень хотелось бы видеть строку поиска (фильтр) по тексту, чтобы я мог например вписать "Europe" и он мне показал все таймзоны для европы, или "Minsk" или "GMT +2" и тд 
+
