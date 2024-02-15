@@ -12,7 +12,7 @@ if (typeof chrome != "undefined" && typeof chrome.storage != "undefined" && type
                 clock.innerText = "00:00:00"
 
                 let label = document.createElement('td');
-                label.innerText = timezone === "UTC/GMT" ? timezone : timezone.split('/').reverse()[0];
+                label.innerText = timezone === "UTC/GMT" ? timezone : timezone.split('/').reverse()[0].replace("_", " ");
                 label.className = "extra-clockbox-label"
 
                 let container = document.createElement("tr")
