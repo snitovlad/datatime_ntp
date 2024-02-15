@@ -1,5 +1,5 @@
 import {d, dUTC} from "../../clockBox/dataForDate.js";
-import {data, utcId, utcLabel} from "../../data.js";
+import {data, utcId, utcLabel, initialDataPromise} from "../../data.js";
 
 export function createTimeZonesArr() {
    data.localTimeZones = Intl.supportedValuesOf('timeZone').map((zone) => {
@@ -38,6 +38,7 @@ export function createTimeZonesArr() {
    })
    //sort the array by zones
    data.localTimeZones.sort((a, b) => b.zoneOffset - a.zoneOffset)
+   // adding UTC/GMT at the beginning
    data.localTimeZones.unshift({ id: utcId, zoneName: utcLabel, isOnLocalTimebox: data.initialLocalTimeZones.includes(utcId)})
 
    return data.localTimeZones

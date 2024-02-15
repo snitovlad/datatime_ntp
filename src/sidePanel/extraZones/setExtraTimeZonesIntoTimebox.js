@@ -2,7 +2,7 @@ import { updateDate } from "../../clockBox/updateDate.js";
 import { updateTime } from "../../clockBox/updateTime.js";
 import { data } from "../../data.js";
 
-export function setExtraTimeZonesIntoTimebox() {
+export function setExtraTimeZonesIntoTimebox(isInitial = false) {
 	const localTimeboxContainer = document.getElementById('extra-clocks-table');
 
 	localTimeboxContainer.innerHTML = '';
@@ -29,11 +29,15 @@ export function setExtraTimeZonesIntoTimebox() {
 			localTimeboxContainer.append(container)
 		}
 	})
-	data.initialLocalTimeZones = newInitialTimeZones;
-	if (typeof chrome != "undefined" && typeof chrome.storage != "undefined" && typeof chrome.storage.sync != "undefined") {
-		chrome.storage.sync.set({ 'initiallocaltimezones': data.initialLocalTimeZones });
-	}
+	if (!isInitial) {
+		data.initialLocalTimeZones = newInitialTimeZones;
+		if (typeof chrome != "undefined" && typeof chrome.storage != "undefined" && typeof chrome.storage.sync != "undefined") {
+			chrome.storage.sync.set({ 'initiallocaltimezones': data.initialLocalTimeZones });
+		} else {
+			localStorage.setItem('initiallocaltimezones', JSON.stringify(data.initialLocalTimeZones));
+		}
 
-	updateTime();
-	updateDate();
+		updateTime();
+		updateDate();
+	}
 }
