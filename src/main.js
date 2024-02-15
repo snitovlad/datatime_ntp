@@ -10,7 +10,7 @@ import { searchInput } from "./sidePanel/searchBlock/searchInput.js";
 
 window.onload = function () {
    updateTime();
-   updateDate();   
+   updateDate();
    setInterval(updateTime, 1000);
    setInterval(updateDate, 100000);
 

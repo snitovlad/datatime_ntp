@@ -31,7 +31,7 @@ export function createTimeZonesArr() {
             offsetInHours++;
          }
       }
-      
+
       if (offsetInMinutes === 0) offsetInMinutes = '00'
       if (offsetInHours >= 0) offsetInHours = '+' + offsetInHours;
 

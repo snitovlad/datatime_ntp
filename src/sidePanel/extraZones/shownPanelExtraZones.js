@@ -1,4 +1,4 @@
-import { data } from "../../data.js";
+import { data} from "../../data.js";
 import { createElementLi } from "./createElementLi.js";
 
 export const buttonElement = document.getElementById('settings-button');
@@ -23,6 +23,3 @@ export function shownPanelExtraZones() {
 	} else { document.getElementById('button-block').classList.add('active') }
 }
 
-
-
-// createElementLi(data.localTimeZones)
