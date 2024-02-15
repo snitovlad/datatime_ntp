@@ -9,6 +9,7 @@ import { searchDelete } from "./sidePanel/searchBlock/searchDelete.js";
 import { searchInput } from "./sidePanel/searchBlock/searchInput.js";
 
 window.onload = function () {
+   document.getElementById("settings-button").style.display = "block";
    updateTime();
    updateDate();
    setInterval(updateTime, 1000);

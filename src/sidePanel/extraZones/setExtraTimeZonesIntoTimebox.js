@@ -3,29 +3,37 @@ import { updateTime } from "../../clockBox/updateTime.js";
 import { data } from "../../data.js";
 
 export function setExtraTimeZonesIntoTimebox() {
-	const localTimeboxContainer = document.querySelector('.local-clockbox-container');
+	const localTimeboxContainer = document.getElementById('extra-clocks-table');
 
 	localTimeboxContainer.innerHTML = '';
 
+	let newInitialTimeZones = [];
+
 	data.localTimeZones.forEach((element) => {
 		if (element.isOnLocalTimebox === true) {
-			let span = document.createElement('span');
 			let timezone = element.id
-			span.id = "clockbox-" + timezone;
-			span.innerText = "00:00:00"
+			newInitialTimeZones.push(timezone)
+			let clock = document.createElement('td');
+			clock.id = "clockbox-" + timezone;
+			clock.innerText = "00:00:00"
 
-			let label = document.createElement('span');
-			label.innerText = element.zoneName.replace(/\(\w+[\W\d+]+\)/, ''); //deleted "(GMT+8:00)"
+			let label = document.createElement('td');
+			// removing everything except the city name
+			label.innerText = element.zoneName.replace(/,.*$/, '');
+			label.className = "extra-clockbox-label"
 
-			let container = document.createElement("div")
+			let container = document.createElement("tr")
 			container.id = element.id
-			container.className = "extra-clockbox-container"
-
 			container.append(label)
-			container.append(span)
+			container.append(clock)
 			localTimeboxContainer.append(container)
 		}
 	})
+	data.initialLocalTimeZones = newInitialTimeZones;
+	if (typeof chrome != "undefined" && typeof chrome.storage != "undefined" && typeof chrome.storage.sync != "undefined") {
+		chrome.storage.sync.set({ 'initiallocaltimezones': data.initialLocalTimeZones });
+	}
+
 	updateTime();
 	updateDate();
 }

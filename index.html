@@ -4,8 +4,9 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>New Tab</title>
    <link rel="stylesheet" href="./src/styles.css">
+   <script src="loadSettings.js"></script>
 </head>
 
 <body class="color-normal">
@@ -16,13 +17,17 @@
       <div id="clockbox">00:00:00</div>
       <div id="extra-clocks">
          <div class="extra-clockbox-container">
-            <span id="label-UTC/GMT">UTC/GMT </span><span id="clockbox-UTC/GMT">00:00:00</span>
-            <div class="local-clockbox-container"></div>
+            <table id="extra-clocks-table">
+               <tr id="UTC/GMT">
+                  <td class="extra-clockbox-label" id="label-UTC/GMT">UTC/GMT</td>
+                  <td id="clockbox-UTC/GMT">00:00:00</td>
+               </tr>
+            </table>
          </div>
       </div>
-   </div>   
+   </div>
 
-   <button id="settings-button" class="color-normal">
+   <button id="settings-button" class="color-normal" style="display:none">
       <svg height="512px" id="settings-icon" viewBox="0 0 512 512" width="512px" xml:space="preserve"
          xmlns="http://www.w3.org/2000/svg">
          <path
