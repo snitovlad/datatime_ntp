@@ -2,23 +2,25 @@ import { data } from "../../data.js";
 
 const switchOn = document.getElementById('on');
 export function setTheme() {
+   switchOn.checked = data.isThemeDark
+   theme(true)
+
    document.getElementById('theme-button').addEventListener('change', () => {
-      if (switchOn.checked === true) {
-         data.isThemeDark = true
-      } else {
-         data.isThemeDark = false
-      }
+      data.isThemeDark = switchOn.checked === true;
       theme()
    })
 }
 
-function theme() {
-   if (data.isThemeDark === false) {
-      document.body.className = 'color-normal'
-      document.getElementById('settings-button').className = 'color-normal'
-   } else {
-      document.body.className = 'color-dark'
-      document.getElementById('settings-button').className = 'color-dark'
+function theme(isInitial = false) {
+   const suffix = data.isThemeDark ? 'dark' : 'normal';
+   document.body.className = `color-${suffix}`
+   document.getElementById('settings-button').className = `color-${suffix}`
+   if (!isInitial) {
+      if (typeof chrome != "undefined" && typeof chrome.storage != "undefined" && typeof chrome.storage.sync != "undefined") {
+         chrome.storage.sync.set({ newtabcolortheme: suffix });
+      } else {
+         localStorage.setItem('newtabcolortheme', suffix);
+      }
    }
 }
 
